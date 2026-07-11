@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { ParamsProvider } from "../context/context.tsx";
+
+import { ParamsProvider } from "../context/context";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ParamsProvider>

@@ -1,37 +1,58 @@
-import React, { useState } from 'react';
-import { createStartingGrid } from '../utils/startingGrid';
-import type { GridType } from '../utils/types';
+import type { FC } from "react";
+import { useParams } from "../context/context";
 
-export const GridBoard: React.FC = () => {
-  // 1. STATE INITIALIZATION: Creates the grid layout once when the component loads
-  const [grid] = useState<GridType>(() => 
-    createStartingGrid({ rows: 15, cols: 15, startCoord: [0, 0], targetCoord: [12, 12] })
-  );
+export const GridBoard: FC = () => {
+  const { grid } = useParams();
 
-  // 2. RENDERING (The "State Loop"): Loops through the grid state to draw the UI
   return (
-    <div className="grid-container" style={{ display: 'flex', flexDirection: 'column' }}>
-      {grid.map((row, y) => (
-        <div key={y} className="grid-row" style={{ display: 'flex' }}>
-          {row.map((cell, x) => (
-            <div 
-              key={`${x}-${y}`} 
-              style={{
-                width: '30px',
-                height: '30px',
-                border: '1px solid #ccc',
-                backgroundColor: cell.isStarting ? 'green' : cell.isTarget ? 'red' : 'white',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '10px'
-              }}
-            >
-              {cell.weight}
+    <section className="grid-shell" aria-label="Pathfinding grid preview">
+      <div className="grid-header">
+        <div>
+          <p className="eyebrow">Live maze board</p>
+          <h2>Route map</h2>
+        </div>
+        <div className="legend" aria-label="Legend">
+          <span className="legend-item">
+            <i className="legend-dot start" /> Start
+          </span>
+          <span className="legend-item">
+            <i className="legend-dot target" /> Target
+          </span>
+          <span className="legend-item">
+            <i className="legend-dot wall" /> Wall
+          </span>
+        </div>
+      </div>
+
+      <div className="grid-frame">
+        <div className="grid-board">
+          {grid.map((row, y) => (
+            <div key={y} className="grid-row">
+              {row.map((cell, x) => {
+                let className = "grid-cell";
+
+                if (cell.isStarting) {
+                  className += " start";
+                } else if (cell.isTarget) {
+                  className += " target";
+                } else if (cell.isWall) {
+                  className += " wall";
+                } else if (cell.weight === 5) {
+                  className += " weight";
+                }
+
+                return (
+                  <div
+                    key={`${x}-${y}`}
+                    className={className}
+                    aria-label={`Cell ${x}, ${y}`}
+                  />
+                );
+              })}
             </div>
           ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 };
