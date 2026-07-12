@@ -72,8 +72,6 @@ export function ParamsProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <ParamsContext.Provider value={value}>
-    {children}
-    </ParamsContext.Provider>
+    <ParamsContext.Provider value={value}>{children}</ParamsContext.Provider>
   );
 }

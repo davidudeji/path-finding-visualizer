@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import "./Navbar.css";
 import { useParams } from "../context/context";
 
@@ -113,3 +114,14 @@ export default function Navbar() {
     </div>
   );
 }
+=======
+.navbar{
+    width:100%;  
+    height:min(20vh , 100px);
+    background:black;
+}
+
+.navbar .selected {
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255,     0.5) -3px -3px 6px 1px inset;
+}
+>>>>>>> 2417618345bc5f1b1ce8babf71c6280d864ddcc4
