@@ -2,15 +2,11 @@
 
 > Watch algorithms think in real time on a fully interactive grid.
 
-PathFind is a browser-based visualizer that animates five classic pathfinding algorithms on a drag-to-draw grid. You can place walls, paint weighted terrain, generate mazes, and compare how each algorithm navigates from **start** to **end** — all running in a Web Worker so the UI stays buttery smooth.
+PathFind is a browser-based visualizer that animates five classic pathfinding algorithms on a drag-to-draw grid. You can place walls, paint weighted terrain, generate mazes, and compare how each algorithm navigates from **start** to **end** 
 
 ---
 
-## Live Demo
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com)
-
----
 
 ## Features
 
@@ -49,7 +45,7 @@ PathFind is a browser-based visualizer that animates five classic pathfinding al
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/path-finding-visualizer.git
+git clone https://github.com/davidudeji/path-finding-visualizer.git
 cd path-finding-visualizer
 
 # Install dependencies
@@ -67,36 +63,8 @@ Open http://localhost:5173 in your browser.
 npm run build
 ```
 
-The production bundle is output to `dist/`.
 
-### Preview Production Build
 
-```bash
-npm run preview
-```
-
----
-
-## Deploying to Vercel
-
-The repo ships with a `vercel.json` that configures the build command, output directory, and SPA fallback rewrites automatically.
-
-### Option 1 — Vercel Dashboard (Recommended)
-
-1. Push the repo to GitHub / GitLab / Bitbucket.
-2. Go to https://vercel.com/new and import the repo.
-3. Vercel auto-detects Vite — click **Deploy**.
-
-### Option 2 — Vercel CLI
-
-```bash
-npm i -g vercel
-vercel
-```
-
-Follow the prompts. The project will be live within seconds.
-
----
 
 ## Project Structure
 
@@ -145,7 +113,7 @@ path-finding-visualizer/
 
 ---
 
-## Algorithms at a Glance
+## Algorithms 
 
 | Algorithm | Shortest Path? | Weights? | Notes |
 |---|---|---|---|
@@ -155,14 +123,3 @@ path-finding-visualizer/
 | A* | Yes | Yes | Heuristic-guided, fastest |
 | Bidirectional BFS | Yes (unweighted) | No | Two frontiers meeting in the middle |
 
----
-
-## Contributing
-
-Pull requests are welcome! Please open an issue first to discuss what you'd like to change.
-
----
-
-## License
-
-MIT
