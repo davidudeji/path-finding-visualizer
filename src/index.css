@@ -28,9 +28,15 @@
 }
 
 /* ─── Reset & Base ─────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -43,42 +49,109 @@ html, body, #root {
 
 /* ─── Cell Animations ──────────────────────────────────────── */
 @keyframes pop-wall {
-  0%   { transform: scale(0.6); opacity: 0.3; }
-  60%  { transform: scale(1.15); }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+
+  60% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes fade-visited {
-  0%   { transform: scale(0.3) rotate(-20deg); opacity: 0; background: #818cf8; }
-  50%  { transform: scale(1.1) rotate(5deg); opacity: 0.9; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; background: var(--color-cell-visited); }
+  0% {
+    transform: scale(0.3) rotate(-20deg);
+    opacity: 0;
+    background: #818cf8;
+  }
+
+  50% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    background: var(--color-cell-visited);
+  }
 }
 
 @keyframes fade-visited-b {
-  0%   { transform: scale(0.3) rotate(20deg); opacity: 0; background: #38bdf8; }
-  50%  { transform: scale(1.1) rotate(-5deg); opacity: 0.9; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; background: var(--color-cell-visited-b); }
+  0% {
+    transform: scale(0.3) rotate(20deg);
+    opacity: 0;
+    background: #38bdf8;
+  }
+
+  50% {
+    transform: scale(1.1) rotate(-5deg);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    background: var(--color-cell-visited-b);
+  }
 }
 
 @keyframes sweep-path {
-  0%   { transform: scale(0.4); opacity: 0; background: #fcd34d; }
-  60%  { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); background: var(--color-cell-path); }
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+    background: #fcd34d;
+  }
+
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    background: var(--color-cell-path);
+  }
 }
 
 @keyframes pulse-start {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
-  50%       { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  }
+
+  50% {
+    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0);
+  }
 }
 
 @keyframes pulse-end {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
-  50%       { box-shadow: 0 0 0 5px rgba(239, 68, 68, 0); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
+  }
+
+  50% {
+    box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+  }
 }
 
 @keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* ─── Cell Base Class ──────────────────────────────────────── */
@@ -150,7 +223,7 @@ html, body, #root {
   border: 1px solid var(--color-border);
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(79, 70, 229, 0.1), 0 0 0 1px rgba(255,255,255,0.03);
+  box-shadow: 0 0 40px rgba(79, 70, 229, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
 .grid-row {
@@ -158,10 +231,23 @@ html, body, #root {
 }
 
 /* ─── Scrollbar Styling ────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--color-bg-primary); }
-::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
 
 /* ─── Custom Select ────────────────────────────────────────── */
 select {
@@ -189,7 +275,7 @@ select {
   white-space: nowrap;
   padding: 4px 8px;
   border-radius: 4px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   pointer-events: none;
   opacity: 0;
   transition: opacity 150ms;
@@ -198,4 +284,5 @@ select {
 
 [data-tooltip]:hover::after {
   opacity: 1;
+
 }

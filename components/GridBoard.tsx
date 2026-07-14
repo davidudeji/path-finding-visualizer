@@ -1,3 +1,4 @@
+
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "../context/context";
 import { Row } from "./Row";
@@ -314,5 +315,5 @@ export const GridBoard: React.FC = () => {
         />
       ))}
     </div>
-  );
-};
+  )
+}

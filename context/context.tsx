@@ -152,5 +152,8 @@ export function ParamsProvider({ children }: { children: ReactNode }) {
     [grid, algorithm, heuristic, mode, terrain, speed, isRunning, stats, resetPath, resetAll, applyMaze],
   );
 
-  return <ParamsContext.Provider value={value}>{children}</ParamsContext.Provider>;
+
+  return (
+    <ParamsContext.Provider value={value}>{children}</ParamsContext.Provider>
+  );
 }
