@@ -1,1 +1,201 @@
 @import "tailwindcss";
+
+/* ─── Custom CSS Variables ─────────────────────────────────── */
+:root {
+  --color-bg-primary: #080c18;
+  --color-bg-secondary: #0d1225;
+  --color-bg-nav: #0a0f1e;
+  --color-border: rgba(99, 102, 241, 0.15);
+
+  --color-cell-empty: #111827;
+  --color-cell-empty-border: #1e2a40;
+  --color-cell-wall: #0a0c14;
+  --color-cell-visited: #4f46e5;
+  --color-cell-visited-b: #0891b2;
+  --color-cell-path: #f59e0b;
+  --color-cell-start: #10b981;
+  --color-cell-end: #ef4444;
+
+  --color-terrain-sand: #92400e;
+  --color-terrain-water: #075985;
+  --color-terrain-forest: #14532d;
+  --color-terrain-sand-light: #b45309;
+  --color-terrain-water-light: #0369a1;
+  --color-terrain-forest-light: #166534;
+
+  --font-main: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg-primary);
+  color: #e2e8f0;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+/* ─── Cell Animations ──────────────────────────────────────── */
+@keyframes pop-wall {
+  0%   { transform: scale(0.6); opacity: 0.3; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-visited {
+  0%   { transform: scale(0.3) rotate(-20deg); opacity: 0; background: #818cf8; }
+  50%  { transform: scale(1.1) rotate(5deg); opacity: 0.9; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; background: var(--color-cell-visited); }
+}
+
+@keyframes fade-visited-b {
+  0%   { transform: scale(0.3) rotate(20deg); opacity: 0; background: #38bdf8; }
+  50%  { transform: scale(1.1) rotate(-5deg); opacity: 0.9; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; background: var(--color-cell-visited-b); }
+}
+
+@keyframes sweep-path {
+  0%   { transform: scale(0.4); opacity: 0; background: #fcd34d; }
+  60%  { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); background: var(--color-cell-path); }
+}
+
+@keyframes pulse-start {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  50%       { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+}
+
+@keyframes pulse-end {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  50%       { box-shadow: 0 0 0 5px rgba(239, 68, 68, 0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Cell Base Class ──────────────────────────────────────── */
+.cell {
+  transition: background-color 80ms ease, transform 80ms ease;
+  will-change: transform, background-color;
+  cursor: crosshair;
+}
+
+.cell-empty {
+  background: var(--color-cell-empty);
+  border: 1px solid var(--color-cell-empty-border);
+}
+
+.cell-wall {
+  background: var(--color-cell-wall);
+  border: 1px solid #1a1f2e;
+  animation: pop-wall 180ms ease forwards;
+}
+
+.cell-visited {
+  background: var(--color-cell-visited);
+  border: 1px solid #6d28d9;
+  animation: fade-visited 300ms ease forwards;
+}
+
+.cell-visited-b {
+  background: var(--color-cell-visited-b);
+  border: 1px solid #0e7490;
+  animation: fade-visited-b 300ms ease forwards;
+}
+
+.cell-path {
+  background: var(--color-cell-path);
+  border: 1px solid #d97706;
+  animation: sweep-path 350ms ease forwards;
+}
+
+.cell-start {
+  background: var(--color-cell-start) !important;
+  border: 1px solid #059669 !important;
+  animation: pulse-start 2s infinite;
+}
+
+.cell-end {
+  background: var(--color-cell-end) !important;
+  border: 1px solid #dc2626 !important;
+  animation: pulse-end 2s infinite;
+}
+
+.cell-weight-sand {
+  background: var(--color-terrain-sand);
+  border: 1px solid var(--color-terrain-sand-light);
+}
+
+.cell-weight-water {
+  background: var(--color-terrain-water);
+  border: 1px solid var(--color-terrain-water-light);
+}
+
+.cell-weight-forest {
+  background: var(--color-terrain-forest);
+  border: 1px solid var(--color-terrain-forest-light);
+}
+
+/* ─── Grid Container ───────────────────────────────────────── */
+.grid-container {
+  display: inline-block;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(79, 70, 229, 0.1), 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.grid-row {
+  display: flex;
+}
+
+/* ─── Scrollbar Styling ────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-primary); }
+::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+/* ─── Custom Select ────────────────────────────────────────── */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  padding-right: 2rem !important;
+}
+
+/* ─── Tooltip ──────────────────────────────────────────────── */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e2a40;
+  color: #e2e8f0;
+  font-size: 11px;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.08);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms;
+  z-index: 50;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+}

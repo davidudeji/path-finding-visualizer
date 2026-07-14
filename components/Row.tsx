@@ -5,14 +5,25 @@ import { Cell } from "./Cell";
 type RowProps = {
   row: GridCell[];
   y: number;
+  cellSize: number;
+  onMouseDown: (x: number, y: number) => void;
+  onMouseEnter: (x: number, y: number) => void;
+  onMouseUp: () => void;
 };
 
-export const Row: React.FC<RowProps> = React.memo(({ row, y }) => {
-  return (
-    <div className="flex">
-      {row.map((cell, x) => (
-        <Cell key={`${x}-${y}`} cell={cell} x={x} y={y} />
-      ))}
-    </div>
-  );
-});
+export const Row = React.memo(({ row, y, cellSize, onMouseDown, onMouseEnter, onMouseUp }: RowProps) => (
+  <div className="grid-row" role="row" aria-label={`Row ${y}`}>
+    {row.map((cell) => (
+      <Cell
+        key={`${cell.x}-${cell.y}`}
+        cell={cell}
+        cellSize={cellSize}
+        onMouseDown={onMouseDown}
+        onMouseEnter={onMouseEnter}
+        onMouseUp={onMouseUp}
+      />
+    ))}
+  </div>
+));
+
+Row.displayName = "Row";

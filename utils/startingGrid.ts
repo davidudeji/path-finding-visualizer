@@ -4,29 +4,63 @@ interface GridConfig {
   rows: number;
   cols: number;
   startCoord?: [number, number]; // [x, y]
-  targetCoord?: [number, number]; // [x, y]
+  endCoord?: [number, number];   // [x, y]
 }
 
 export function createStartingGrid({
   rows,
   cols,
-  startCoord = [0, 0],
-  targetCoord = [rows - 1, cols - 1],
+  startCoord = [2, Math.floor(rows / 2)],
+  endCoord = [cols - 3, Math.floor(rows / 2)],
 }: GridConfig): GridType {
-  // Create an array of rows, then map each row to an array of columns
   return Array.from({ length: rows }, (_, y) =>
     Array.from({ length: cols }, (_, x): GridCell => {
-      const isStarting = x === startCoord[0] && y === startCoord[1];
-      const isTarget = x === targetCoord[0] && y === targetCoord[1];
+      const isStart = x === startCoord[0] && y === startCoord[1];
+      const isEnd = x === endCoord[0] && y === endCoord[1];
 
       return {
         x,
         y,
-        isStarting,
-        isTarget,
-        isWall: false, // Default to empty path
-        weight: 1, // Default weight is 1; can be toggled to 5 later
+        isStart,
+        isEnd,
+        isWall: false,
+        terrain: "normal",
+        state: isStart ? "start" : isEnd ? "end" : "empty",
+        gCost: Infinity,
+        animOrder: undefined,
       };
     }),
+  );
+}
+
+export function clearPathState(grid: GridType): GridType {
+  return grid.map((row) =>
+    row.map((cell) => ({
+      ...cell,
+      state: cell.isStart
+        ? "start"
+        : cell.isEnd
+          ? "end"
+          : cell.isWall
+            ? "wall"
+            : cell.terrain !== "normal"
+              ? "weight"
+              : "empty",
+      gCost: Infinity,
+      animOrder: undefined,
+    })),
+  );
+}
+
+export function clearWallsAndPath(grid: GridType): GridType {
+  return grid.map((row) =>
+    row.map((cell) => ({
+      ...cell,
+      isWall: false,
+      terrain: "normal",
+      state: cell.isStart ? "start" : cell.isEnd ? "end" : "empty",
+      gCost: Infinity,
+      animOrder: undefined,
+    })),
   );
 }

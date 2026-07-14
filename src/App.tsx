@@ -1,11 +1,13 @@
 import { GridBoard } from "../components/GridBoard";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../navbar/navbar";
 
 export default function App() {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col" style={{ background: "var(--color-bg-primary)" }}>
       <Navbar />
-      <GridBoard />
+      <main className="flex-1 flex flex-col items-center justify-center py-4 px-2 overflow-auto">
+        <GridBoard />
+      </main>
     </div>
   );
 }
