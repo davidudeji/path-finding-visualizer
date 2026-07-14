@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import { useState } from "react";
-=======
-<<<<<<< HEAD
-import "./Navbar.css";
->>>>>>> 9b47e8f8e8d4348f06eb1b2364e334df9a7c3d8e
 import { useParams } from "../context/context";
 import {
   ALGORITHM_LABELS,
@@ -443,14 +438,3 @@ export default function Navbar() {
     </header>
   );
 }
-=======
-.navbar{
-    width:100%;  
-    height:min(20vh , 100px);
-    background:black;
-}
-
-.navbar .selected {
-    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255,     0.5) -3px -3px 6px 1px inset;
-}
->>>>>>> 2417618345bc5f1b1ce8babf71c6280d864ddcc4
